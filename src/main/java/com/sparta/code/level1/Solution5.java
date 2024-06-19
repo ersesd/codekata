@@ -1,4 +1,4 @@
-public class Solution {
+public class Solution5 {
     public int solution(String s) {
         // 문자열의 최종적인 수
         int answer = 0;
