@@ -1,17 +1,16 @@
 package com.sparta.code.level2;
 
-public class Solution5 {
+class Solution5 {
     
-    public String solution(int[] food) {
-        String answer = "0";
-
-        for (int i = food.length - 1; i > 0; i--) {
-            
-            for (int j = 0; j < food[i] / 2; j++) {
-                answer = i + answer + i; 
-            }
+    public int solution5(int a, int b, int n) {
+        
+        int answer = 0;
+        
+        while (n / a >= 1) {
+            answer += (n / a) * b;
+            n = ((n / a) * b) + (n % a);
         }
-
+        
         return answer;
     }
     
