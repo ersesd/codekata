@@ -2,7 +2,7 @@ package com.sparta.code.level1;
 
 import java.util.*;
 
-class Solution {
+class Solution17 {
     
     public int solution(int k, int m, int[] score) {
         
