@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-class Solution {
+class Solution1 {
     public int solution(String[] want, int[] number, String[] discount) {
         int answer = 0;
 
