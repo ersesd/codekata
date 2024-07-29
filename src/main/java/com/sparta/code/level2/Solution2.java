@@ -1,6 +1,8 @@
+package com.sparta.code.level2;
+
 import java.util.*;
 
-class Solution {
+class Solution2 {
     public int solution(String s) {
         int answer = 0;
         Stack<Character> stack = new Stack<>();
