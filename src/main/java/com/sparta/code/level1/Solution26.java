@@ -1,4 +1,4 @@
-\package com.sparta.code.level1;
+package com.sparta.code.level1;
 
 class Solution26 {
     
