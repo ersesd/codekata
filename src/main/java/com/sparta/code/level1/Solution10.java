@@ -1,7 +1,9 @@
-class Solution {
+package com.sparta.code.level1;
+
+class Solution10 {
     public int[] solution(int[] lottos, int[] win_nums) {
-        int answer[] = new int[2];
-        int rank[] = {6,6,5,4,3,2,1};
+        int[] answer = new int[2];
+        int[] rank = {6,6,5,4,3,2,1};
         int zero = 0;
         int count = 0;
 

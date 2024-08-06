@@ -1,6 +1,8 @@
+package com.sparta.code.level1;
+
 import java.util.Scanner;
 
-class Solution {
+class Solution12 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int a = sc.nextInt();
