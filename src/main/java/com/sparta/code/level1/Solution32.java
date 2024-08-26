@@ -1,8 +1,8 @@
-package com.sparta.code.level2;
+package com.sparta.code.level1;
 
 import java.util.Arrays;
 
-class Solution {
+class Solution32 {
     public int solution(int []A, int []B) {
         int answer = 0;
 
