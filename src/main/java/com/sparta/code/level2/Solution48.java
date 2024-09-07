@@ -1,6 +1,6 @@
 package com.sparta.code.level2;
 
-class Solution {
+class Solution48 {
     public int solution(int n) {
         int answer = 0;
         
