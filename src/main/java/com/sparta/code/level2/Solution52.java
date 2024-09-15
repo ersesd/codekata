@@ -1,6 +1,6 @@
 package com.sparta.code.level2;
 
-public class Solution {
+public class Solution52 {
     public static void main(String[] args) {
         System.out.println(solution(4)); 
     }
