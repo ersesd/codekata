@@ -2,7 +2,7 @@ package com.sparta.code.level2;
 
 import java.util.HashSet;
 
-public class Solution {
+public class Solution56 {
     
     public static int solution(String dirs) {
         HashSet<String> visited = new HashSet<>();
