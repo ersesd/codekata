@@ -1,8 +1,6 @@
 package com.sparta.code.level2;
 
-import java.util.Arrays;
-
-class Solution {
+class Solution61 {
     
     public int solution(int[] arrayA, int[] arrayB) {
         int gcdA = findGCD(arrayA);
