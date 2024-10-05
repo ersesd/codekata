@@ -1,6 +1,7 @@
 package com.sparta.code.level2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 class Solution67 {
     
