@@ -1,6 +1,6 @@
 package com.sparta.code.level1;
 
-class Solution {
+class n19 {
     public String[] solution(String[] quiz) {
         String[] result = new String[quiz.length];
         
