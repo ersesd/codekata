@@ -1,21 +1,22 @@
 package com.sparta.code.level1;
 
-import java.util.*;
-
 class Solution {
     
-    public int solution(int[] common) {
-        int length = common.length;
+    public String[] solution(String[] quiz) {
+        String[] result = new String[quiz.length];
         
-        // 등차수열 확인
-        if (common[1] - common[0] == common[2] - common[1]) {
-            int difference = common[1] - common[0];
-            return common[length - 1] + difference;
+        for (int i = 0; i < quiz.length; i++) {
+            String[] parts = quiz[i].split(" ");
+            int x = Integer.parseInt(parts[0]);
+            String operator = parts[1];
+            int y = Integer.parseInt(parts[2]);
+            int z = Integer.parseInt(parts[4]);
+            
+            int calculated = operator.equals("+") ? x + y : x - y;
+            result[i] = (calculated == z) ? "O" : "X";
         }
         
-        // 등비수열 확인
-        int ratio = common[1] / common[0];
-        return common[length - 1] * ratio;
+        return result;
     }
     
 }
