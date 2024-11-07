@@ -1,22 +1,31 @@
 package com.sparta.code.level1;
 
+import java.util.*;
+
 class Solution {
     
-    public String[] solution(String[] quiz) {
-        String[] result = new String[quiz.length];
+    public int[] solution(int[] answers) {
+        int[] p1 = {1, 2, 3, 4, 5};
+        int[] p2 = {2, 1, 2, 3, 2, 4, 2, 5};
+        int[] p3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
         
-        for (int i = 0; i < quiz.length; i++) {
-            String[] parts = quiz[i].split(" ");
-            int x = Integer.parseInt(parts[0]);
-            String operator = parts[1];
-            int y = Integer.parseInt(parts[2]);
-            int z = Integer.parseInt(parts[4]);
-            
-            int calculated = operator.equals("+") ? x + y : x - y;
-            result[i] = (calculated == z) ? "O" : "X";
+        int[] scores = new int[3];
+        
+        for (int i = 0; i < answers.length; i++) {
+            if (answers[i] == p1[i % p1.length]) scores[0]++;
+            if (answers[i] == p2[i % p2.length]) scores[1]++;
+            if (answers[i] == p3[i % p3.length]) scores[2]++;
         }
         
-        return result;
+        int maxScore = Math.max(scores[0], Math.max(scores[1], scores[2]));
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < scores.length; i++) {
+            if (scores[i] == maxScore) {
+                result.add(i + 1);
+            }
+        }
+        
+        return result.stream().mapToInt(i -> i).toArray();
     }
     
 }
