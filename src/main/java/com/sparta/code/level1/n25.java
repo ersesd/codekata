@@ -2,7 +2,7 @@ package com.sparta.code.level1;
 
 import java.util.*;
 
-class Solution {
+class n25 {
     
     public int[] solution(int[] answers) {
         int[] p1 = {1, 2, 3, 4, 5};
