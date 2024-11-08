@@ -2,7 +2,7 @@ package com.sparta.code.level3;
 
 import java.util.*;
 
-class Solution {
+class Solution2 {
     
     public int solution(String begin, String target, String[] words) {
         if (!Arrays.asList(words).contains(target)) {
