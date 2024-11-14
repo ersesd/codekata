@@ -2,7 +2,7 @@ package com.sparta.code.level2;
 
 import java.util.*;
 
-class Solution {
+class Solution89 {
     
     public int solution(int[] scoville, int K) {
         PriorityQueue<Integer> pq = new PriorityQueue<>();
