@@ -2,7 +2,7 @@ package com.sparta.code.level3;
 
 import java.util.*;
 
-class Solution {
+class Solution4 {
     
     public int solution(int[] A, int[] B) {
         Arrays.sort(A);
