@@ -2,7 +2,7 @@ package com.sparta.code.level3;
 
 import java.util.*;
 
-class Solution {
+class Solution7 {
     
     public int[] solution(int n, int s) {
         if (s < n) {
