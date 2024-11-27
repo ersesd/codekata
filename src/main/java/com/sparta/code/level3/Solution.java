@@ -6,6 +6,7 @@ class Solution {
 
     public int solution(int n, int[][] vertex) {
         List<List<Integer>> graph = new ArrayList<>();
+
         for (int i = 0; i <= n; i++) {
             graph.add(new ArrayList<>());
         }
