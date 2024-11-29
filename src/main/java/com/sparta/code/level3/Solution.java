@@ -3,39 +3,46 @@ package com.sparta.code.level3;
 import java.util.*;
 
 class Solution {
-
-    public int solution(int n, int[][] vertex) {
-        List<List<Integer>> graph = new ArrayList<>();
-        for (int i = 0; i <= n; i++) {
-            graph.add(new ArrayList<>());
+    
+    public int solution(int n, int[][] costs) {
+        Arrays.sort(costs, Comparator.comparingInt(o -> o[2]));
+        int[] parent = new int[n];
+        for (int i = 0; i < n; i++) {
+            parent[i] = i;
         }
         
-        for (int[] edge : vertex) {
-            graph.get(edge[0]).add(edge[1]);
-            graph.get(edge[1]).add(edge[0]);
-        }
+        int totalCost = 0;
+        int edgesUsed = 0;
         
-        int[] distances = new int[n + 1];
-        Arrays.fill(distances, -1);
-        distances[1] = 0;
-        
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(1);
-        
-        while (!queue.isEmpty()) {
-            int current = queue.poll();
-            for (int neighbor : graph.get(current)) {
-                if (distances[neighbor] == -1) {
-                    distances[neighbor] = distances[current] + 1;
-                    queue.add(neighbor);
-                }
+        for (int[] cost : costs) {
+            int from = cost[0];
+            int to = cost[1];
+            int costValue = cost[2];
+            
+            if (findParent(parent, from) != findParent(parent, to)) {
+                unionParent(parent, from, to);
+                totalCost += costValue;
+                edgesUsed++;
+                if (edgesUsed == n - 1) break;
             }
         }
         
-        int maxDistance = Arrays.stream(distances).max().getAsInt();
-        int count = (int) Arrays.stream(distances).filter(d -> d == maxDistance).count();
-        
-        return count;
+        return totalCost;
     }
 
+    private int findParent(int[] parent, int node) {
+        if (parent[node] == node) return node;
+        return parent[node] = findParent(parent, parent[node]);
+    }
+
+    private void unionParent(int[] parent, int node1, int node2) {
+        int root1 = findParent(parent, node1);
+        int root2 = findParent(parent, node2);
+        if (root1 < root2) {
+            parent[root2] = root1;
+        } else {
+            parent[root1] = root2;
+        }
+    }
+    
 }
