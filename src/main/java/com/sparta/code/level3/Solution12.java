@@ -2,7 +2,7 @@ package com.sparta.code.level3;
 
 import java.util.*;
 
-class Solution {
+class Solution12 {
     
     public int solution(int n, int[][] costs) {
         Arrays.sort(costs, Comparator.comparingInt(o -> o[2]));
