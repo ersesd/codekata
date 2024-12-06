@@ -2,7 +2,7 @@ package com.sparta.code.level3;
 
 import java.util.*;
 
-class Solution {
+class Solution15 {
     public int[][] solution(int n) {
         int[][] spiral = new int[n][n];
         int value = 1;
