@@ -2,7 +2,7 @@ package com.sparta.code.level2;
 
 import java.util.*;
 
-class Solution {
+class Solution90 {
     public String[] solution(int[][] line) {
         List<int[]> points = new ArrayList<>();
 
@@ -75,7 +75,7 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        Solution90 sol = new Solution90();
 
         System.out.println(Arrays.toString(sol.solution(new int[][]{
             {2, -1, 4},
