@@ -2,7 +2,8 @@ package com.sparta.code.level2;
 
 import java.util.*;
 
-class Solution {
+class Solution94 {
+
     public int solution(int[][] targets) {
         // 타겟을 끝나는 지점 기준으로 정렬
         Arrays.sort(targets, (a, b) -> Integer.compare(a[1], b[1]));
@@ -25,11 +26,12 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        Solution94 sol = new Solution94();
 
         // 테스트 케이스
         System.out.println(sol.solution(new int[][]{{4, 5}, {4, 8}, {10, 14}, {11, 13}, {5, 12}, {3, 7}, {1, 4}})); // 3
         System.out.println(sol.solution(new int[][]{{1, 2}, {2, 3}, {3, 4}, {4, 5}})); // 2
         System.out.println(sol.solution(new int[][]{{1, 5}, {2, 6}, {3, 7}, {4, 8}})); // 1
     }
+
 }
