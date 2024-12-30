@@ -2,19 +2,19 @@ package com.sparta.code.level2;
 
 import java.util.*;
 
-class Solution {
-
-    public int[] checkDistancing(String[][] places) {
+class Solution99 {
+    
+    public int[] solution(String[][] places) {
         int[] result = new int[places.length];
 
         for (int i = 0; i < places.length; i++) {
-            result[i] = isValid(places[i]) ? 1 : 0;
+            result[i] = isPlaceValid(places[i]) ? 1 : 0;
         }
 
         return result;
     }
 
-    private boolean isValid(String[] place) {
+    private boolean isPlaceValid(String[] place) {
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 5; col++) {
                 if (place[row].charAt(col) == 'P' && !isSafe(place, row, col)) {
@@ -58,21 +58,17 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        Solution99 sol = new Solution99();
 
-        // 수식 최대화 테스트 케이스
-        System.out.println(sol.solution("100-200*300-500+20")); // 60420
-        System.out.println(sol.solution("50*6-3*2")); // 300
-
-        // 거리두기 확인 테스트 케이스
         String[][] places = {
-                {"POOOP", "OXXOX", "OPXPX", "OOXOX", "POXXP"},
-                {"POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"},
-                {"PXOPX", "OXOXP", "OXPOX", "OXXOP", "PXPOX"},
-                {"OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"},
-                {"PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"}
+            {"POOOP", "OXXOX", "OPXPX", "OOXOX", "POXXP"},
+            {"POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"},
+            {"PXOPX", "OXOXP", "OXPOX", "OXXOP", "PXPOX"},
+            {"OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"},
+            {"PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"}
         };
 
-        System.out.println(Arrays.toString(sol.checkDistancing(places))); // [1, 0, 1, 1, 1]
+        System.out.println(Arrays.toString(sol.solution(places))); // [1, 0, 1, 1, 1]
     }
+    
 }
