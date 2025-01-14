@@ -1,8 +1,6 @@
 package com.sparta.code.level3;
 
-import java.util.*;
-
-class Solution {
+class Solution23 {
     public int solution(int[] a) {
         if (a.length < 2) return 0; // 스타 수열이 될 수 없음
 
@@ -32,7 +30,7 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        Solution23 sol = new Solution23();
 
         int[] test1 = {0};
         int[] test2 = {5, 2, 3, 3, 5, 3};
