@@ -2,7 +2,7 @@ package com.sparta.code.level2;
 
 import java.util.*;
 
-class Solution {
+class Solution110 {
 
     public int solution(int N, int number) {
         if (N == number) return 1;
@@ -42,7 +42,7 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        Solution110 sol = new Solution110();
 
         System.out.println(sol.solution(5, 12)); // 4
         System.out.println(sol.solution(2, 11)); // 3
