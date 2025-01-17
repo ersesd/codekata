@@ -2,8 +2,8 @@ package com.sparta.code.level2;
 
 import java.util.*;
 
-class Solution {
-    
+class Solution116 {
+
     public int[] solution(String[] gems) {
         Set<String> gemTypes = new HashSet<>(Arrays.asList(gems)); // 보석 종류
         int totalTypes = gemTypes.size();
@@ -40,7 +40,7 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        Solution116 sol = new Solution116();
 
         System.out.println(Arrays.toString(sol.solution(new String[]{"DIA", "RUBY", "RUBY", "DIA", "DIA", "EMERALD", "SAPPHIRE", "DIA"}))); // [3, 7]
         System.out.println(Arrays.toString(sol.solution(new String[]{"AA", "AB", "AC", "AA", "AC"}))); // [1, 3]
