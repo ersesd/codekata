@@ -1,6 +1,6 @@
 package com.sparta.code.level1;
 
-class Solution {
+class Solution44 {
     
     public int solution(String[] babbling) {
         String[] validWords = {"aya", "ye", "woo", "ma"};
