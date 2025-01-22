@@ -4,65 +4,89 @@ import java.util.*;
 
 class Solution {
     
-    public String solution(String m, String[] musicinfos) {
-        m = replaceSharpNotes(m);
-        String answer = "(None)";
-        int longestDuration = 0;
+    static class Node {
+        int x, y, cost, direction;
 
-        for (String info : musicinfos) {
-            String[] details = info.split(",");
-            String startTime = details[0];
-            String endTime = details[1];
-            String title = details[2];
-            String sheet = replaceSharpNotes(details[3]);
+        Node(int x, int y, int cost, int direction) {
+            this.x = x;
+            this.y = y;
+            this.cost = cost;
+            this.direction = direction;
+        }
+    }
 
-            int duration = calculateDuration(startTime, endTime);
-
-            String played = repeatSheet(sheet, duration);
-
-            if (played.contains(m) && duration > longestDuration) {
-                answer = title;
-                longestDuration = duration;
+    public int solution(int[][] board) {
+        int n = board.length;
+        int[][][] cost = new int[n][n][4];
+        for (int[][] row : cost) {
+            for (int[] col : row) {
+                Arrays.fill(col, Integer.MAX_VALUE);
             }
         }
 
-        return answer;
-    }
+        int[] dx = {-1, 1, 0, 0}; // 상, 하, 좌, 우
+        int[] dy = {0, 0, -1, 1};
 
-    private String replaceSharpNotes(String melody) {
-        return melody.replace("C#", "c")
-                     .replace("D#", "d")
-                     .replace("F#", "f")
-                     .replace("G#", "g")
-                     .replace("A#", "a");
-    }
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(new Node(0, 0, 0, -1));
 
-    private int calculateDuration(String start, String end) {
-        String[] startParts = start.split(":");
-        String[] endParts = end.split(":");
-
-        int startHour = Integer.parseInt(startParts[0]);
-        int startMinute = Integer.parseInt(startParts[1]);
-        int endHour = Integer.parseInt(endParts[0]);
-        int endMinute = Integer.parseInt(endParts[1]);
-
-        return (endHour * 60 + endMinute) - (startHour * 60 + startMinute);
-    }
-
-    private String repeatSheet(String sheet, int duration) {
-        StringBuilder played = new StringBuilder();
-        for (int i = 0; i < duration; i++) {
-            played.append(sheet.charAt(i % sheet.length()));
+        for (int i = 0; i < 4; i++) {
+            cost[0][0][i] = 0;
         }
-        return played.toString();
+
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
+
+            for (int i = 0; i < 4; i++) {
+                int nx = current.x + dx[i];
+                int ny = current.y + dy[i];
+                int newCost = current.cost + 100;
+
+                if (current.direction != -1 && current.direction != i) {
+                    newCost += 500; // 코너 비용 추가
+                }
+
+                if (nx >= 0 && ny >= 0 && nx < n && ny < n && board[nx][ny] == 0) {
+                    if (newCost < cost[nx][ny][i]) {
+                        cost[nx][ny][i] = newCost;
+                        queue.add(new Node(nx, ny, newCost, i));
+                    }
+                }
+            }
+        }
+
+        return Arrays.stream(cost[n - 1][n - 1]).min().getAsInt();
     }
 
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        System.out.println(sol.solution("ABCDEFG", new String[]{"12:00,12:14,HELLO,CDEFGAB", "13:00,13:05,WORLD,ABCDEF"})); // "HELLO"
-        System.out.println(sol.solution("CC#BCC#BCC#BCC#B", new String[]{"03:00,03:30,FOO,CC#B", "04:00,04:08,BAR,CC#BCC#BCC#B"})); // "FOO"
-        System.out.println(sol.solution("ABC", new String[]{"12:00,12:14,HELLO,C#DEFGAB", "13:00,13:05,WORLD,ABCDEF"})); // "WORLD"
+        int[][] board1 = {
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0}
+        };
+        System.out.println(sol.solution(board1)); // 900
+
+        int[][] board2 = {
+            {0, 0, 0, 0, 0, 0, 0, 1},
+            {0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 1, 0, 0},
+            {0, 0, 0, 0, 1, 0, 0, 0},
+            {0, 0, 0, 1, 0, 0, 0, 1},
+            {0, 0, 1, 0, 0, 0, 1, 0},
+            {0, 1, 0, 0, 0, 1, 0, 0},
+            {1, 0, 0, 0, 0, 0, 0, 0}
+        };
+        System.out.println(sol.solution(board2)); // 3800
+
+        int[][] board3 = {
+            {0, 0, 1, 0},
+            {0, 0, 0, 0},
+            {0, 1, 0, 1},
+            {1, 0, 0, 0}
+        };
+        System.out.println(sol.solution(board3)); // 2100
     }
     
 }
