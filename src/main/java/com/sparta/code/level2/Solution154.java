@@ -1,6 +1,6 @@
 package com.sparta.code.level2;
 
-class Solution {
+class Solution154 {
 
     public long solution(int w, int h) {
         long totalSquares = (long) w * h; // 전체 정사각형의 개수
@@ -18,7 +18,7 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        Solution154 sol = new Solution154();
         System.out.println(sol.solution(8, 12)); // 80
     }
 
