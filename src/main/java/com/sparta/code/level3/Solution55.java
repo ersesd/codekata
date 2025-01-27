@@ -1,6 +1,6 @@
 package com.sparta.code.level3;
 
-class Solution {
+class Solution55 {
     
     public int solution(String s) {
         int minLength = s.length();
@@ -38,7 +38,7 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        Solution55 sol = new Solution55();
         System.out.println(sol.solution("aabbaccc")); // 7
         System.out.println(sol.solution("ababcdcdababcdcd")); // 9
         System.out.println(sol.solution("abcabcdede")); // 8
