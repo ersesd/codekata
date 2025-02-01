@@ -1,72 +1,63 @@
 package com.sparta.code.level3;
 
-import java.util.*;
-
-class Solution {
+public class Solution {
     
-    public int solution(int n, int s, int a, int b, int[][] fares) {
-        // 무한대 값 설정
-        int INF = 100000000;
-
-        // 플로이드-워셜을 위한 거리 배열 초기화
-        int[][] dist = new int[n + 1][n + 1];
-
-        // 모든 거리를 무한대로 초기화
-        for (int i = 1; i <= n; i++) {
-            Arrays.fill(dist[i], INF);
-            dist[i][i] = 0; // 자기 자신으로 가는 비용은 0
+    public int solution(int[][] board, int[][] skill) {
+        int n = board.length;
+        int m = board[0].length;
+        
+        // board보다 한 행, 한 열 더 큰 크기의 차분 배열 선언
+        int[][] diff = new int[n + 1][m + 1];
+        
+        // 각 skill 연산을 차분 배열에 반영
+        for (int[] s : skill) {
+            int type = s[0];
+            int r1 = s[1];
+            int c1 = s[2];
+            int r2 = s[3];
+            int c2 = s[4];
+            int degree = s[5];
+            
+            // type 1: 공격 (내구도 감소), type 2: 회복 (내구도 증가)
+            int effect = (type == 1) ? -degree : degree;
+            
+            diff[r1][c1] += effect;
+            if (c2 + 1 < m + 1) {
+                diff[r1][c2 + 1] -= effect;
+            }
+            if (r2 + 1 < n + 1) {
+                diff[r2 + 1][c1] -= effect;
+            }
+            if (r2 + 1 < n + 1 && c2 + 1 < m + 1) {
+                diff[r2 + 1][c2 + 1] += effect;
+            }
         }
-
-        // 요금 정보 입력
-        for (int[] fare : fares) {
-            int c = fare[0];
-            int d = fare[1];
-            int f = fare[2];
-            dist[c][d] = f;
-            dist[d][c] = f;
+        
+        // 행 방향 누적합: 각 행에서 왼쪽부터 오른쪽으로 누적
+        for (int i = 0; i < n + 1; i++) {
+            for (int j = 1; j < m + 1; j++) {
+                diff[i][j] += diff[i][j - 1];
+            }
         }
-
-        // 플로이드-워셜 알고리즘 실행 (모든 노드 쌍 최단 거리 계산)
-        for (int k = 1; k <= n; k++) {
-            for (int i = 1; i <= n; i++) {
-                for (int j = 1; j <= n; j++) {
-                    if (dist[i][j] > dist[i][k] + dist[k][j]) {
-                        dist[i][j] = dist[i][k] + dist[k][j];
-                    }
+        
+        // 열 방향 누적합: 각 열에서 위부터 아래로 누적
+        for (int j = 0; j < m + 1; j++) {
+            for (int i = 1; i < n + 1; i++) {
+                diff[i][j] += diff[i - 1][j];
+            }
+        }
+        
+        int answer = 0;
+        // 최종 board의 각 칸에 diff 값을 적용하여 내구도가 1 이상인 건물 개수를 센다.
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (board[i][j] + diff[i][j] >= 1) {
+                    answer++;
                 }
             }
         }
-
-        // 최소 요금 계산
-        int minFare = INF;
-
-        // 모든 지점을 경유지로 고려하여 최소 요금 찾기
-        for (int i = 1; i <= n; i++) {
-            int totalFare = dist[s][i] + dist[i][a] + dist[i][b];
-            minFare = Math.min(minFare, totalFare);
-        }
-
-        return minFare;
-    }
-
-    public static void main(String[] args) {
-        Solution sol = new Solution();
-        int[][] fares1 = {
-            {4, 1, 10}, {3, 5, 24}, {5, 6, 2}, {3, 1, 41},
-            {5, 1, 24}, {4, 6, 50}, {2, 4, 66}, {2, 3, 22}, {1, 6, 25}
-        };
-        System.out.println(sol.solution(6, 4, 6, 2, fares1)); // 82
-
-        int[][] fares2 = {
-            {5, 7, 9}, {4, 6, 4}, {3, 6, 1}, {3, 2, 3}, {2, 1, 6}
-        };
-        System.out.println(sol.solution(7, 3, 4, 1, fares2)); // 14
-
-        int[][] fares3 = {
-            {2,6,6}, {6,3,7}, {4,6,7}, {6,5,11},
-            {2,5,12}, {5,3,20}, {2,4,8}, {4,3,9}
-        };
-        System.out.println(sol.solution(6, 4, 5, 6, fares3)); // 18
+        
+        return answer;
     }
     
 }
