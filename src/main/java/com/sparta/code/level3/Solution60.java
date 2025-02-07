@@ -1,6 +1,6 @@
 package com.sparta.code.level3;
 
-public class Solution {
+public class Solution60 {
     
     public int solution(int[] bandage, int health, int[][] attacks) {
         int t = bandage[0]; // 붕대 감기 시전 시간(연속 성공해야 하는 초 수)
@@ -50,7 +50,7 @@ public class Solution {
     
     // 테스트용 main 메서드 (실행하지 않아도 됩니다)
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        Solution60 sol = new Solution60();
         
         int[] bandage1 = {5, 1, 5};
         int health1 = 30;
