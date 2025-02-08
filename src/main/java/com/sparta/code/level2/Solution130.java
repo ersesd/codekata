@@ -35,7 +35,7 @@ class Solution111 {
     }
 
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        Solution132 sol = new Solution132();
 
         System.out.println(sol.solution("...!@BaT#*..y.abcdefghijklm")); // "bat.y.abcdefghi"
         System.out.println(sol.solution("z-+.^.")); // "z--"
