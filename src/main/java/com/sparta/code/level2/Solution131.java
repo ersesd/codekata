@@ -2,7 +2,7 @@ package com.sparta.code.level2;
 
 import java.util.*;
 
-class Solution {
+class Solution111 {
     
     private final List<Set<Integer>> candidateKeys = new ArrayList<>();
 
@@ -69,7 +69,7 @@ class Solution {
 
     // 실행 예제
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        Solution132 sol = new Solution132();
         String[][] relation = {
             {"100", "ryan", "music", "2"},
             {"200", "apeach", "math", "2"},
