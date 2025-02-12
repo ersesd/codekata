@@ -2,7 +2,7 @@ package com.sparta.code.level1;
 
 import java.util.*;
 
-public class Solution {
+public class Solution46 {
     public int[] solution(int[] numbers) {
         Set<Integer> sumSet = new HashSet<>();
         
