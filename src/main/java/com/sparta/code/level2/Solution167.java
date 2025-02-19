@@ -2,7 +2,7 @@ package com.sparta.code.level2;
 
 import java.util.*;
 
-public class Solution {
+public class Solution167 {
     
     public int[] solution(int rows, int columns, int[][] queries) {
         // rows x columns 크기의 행렬 초기화: 1부터 rows*columns까지 채움.
@@ -64,7 +64,7 @@ public class Solution {
     
     // 테스트를 위한 메서드
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        Solution167 sol = new Solution167();
         
         int rows = 6;
         int columns = 6;
