@@ -4,47 +4,49 @@ import java.util.*;
 
 public class Solution {
     
-    public int[] solution(String[] operations) {
-        TreeMap<Integer, Integer> map = new TreeMap<>();
+    // 정렬된 제재 아이디 조합을 하나의 문자열로 표현하여 저장
+    private static final Set<String> resultSet = new HashSet<>();
+    
+    public int solution(String[] user_id, String[] banned_id) {
+        resultSet.clear();
+        boolean[] used = new boolean[user_id.length];
+        dfs(0, banned_id, user_id, used, new ArrayList<>());
+        return resultSet.size();
+    }
+    
+    private void dfs(int idx, String[] banned, String[] users, boolean[] used, List<String> list) {
+        if (idx == banned.length) {
+            // 후보 조합은 순서에 상관없이 동일하면 같은 조합으로 처리해야 하므로, 정렬 후 문자열로 변환하여 저장
+            List<String> sortedList = new ArrayList<>(list);
+            Collections.sort(sortedList);
+            String key = String.join(",", sortedList);
+            resultSet.add(key);
+            return;
+        }
         
-        for (String op : operations) {
-            String[] parts = op.split(" ");
-            String command = parts[0];
-            int num = Integer.parseInt(parts[1]);
-            
-            if (command.equals("I")) {
-                // 해당 숫자 삽입: 이미 있으면 count 증가
-                map.put(num, map.getOrDefault(num, 0) + 1);
-            } else { // "D" 명령
-                // 빈 큐이면 무시
-                if (map.isEmpty()) continue;
-                
-                if (num == 1) {
-                    // 최댓값 삭제
-                    int maxKey = map.lastKey();
-                    if (map.get(maxKey) == 1) {
-                        map.remove(maxKey);
-                    } else {
-                        map.put(maxKey, map.get(maxKey) - 1);
-                    }
-                } else if (num == -1) {
-                    // 최솟값 삭제
-                    int minKey = map.firstKey();
-                    if (map.get(minKey) == 1) {
-                        map.remove(minKey);
-                    } else {
-                        map.put(minKey, map.get(minKey) - 1);
-                    }
-                }
+        // banned[idx]에 매칭되는 모든 user_id 후보를 탐색
+        for (int i = 0; i < users.length; i++) {
+            if (!used[i] && isMatch(users[i], banned[idx])) {
+                used[i] = true;
+                list.add(users[i]);
+                dfs(idx + 1, banned, users, used, list);
+                list.remove(list.size() - 1);
+                used[i] = false;
             }
         }
-        
-        // 큐가 비어있으면 [0,0] 반환, 아니면 [최댓값, 최솟값] 반환
-        if (map.isEmpty()) {
-            return new int[]{0, 0};
-        } else {
-            return new int[]{map.lastKey(), map.firstKey()};
+    }
+    
+    private boolean isMatch(String user, String banned) {
+        if (user.length() != banned.length()) {
+            return false;
         }
+        for (int i = 0; i < user.length(); i++) {
+            char c1 = user.charAt(i);
+            char c2 = banned.charAt(i);
+            if (c2 == '*') continue;
+            if (c1 != c2) return false;
+        }
+        return true;
     }
     
 }
