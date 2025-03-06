@@ -1,50 +1,38 @@
 package com.sparta.code.level3;
 
-import java.util.*;
-
 public class Solution {
     
-    // 정렬된 제재 아이디 조합을 하나의 문자열로 표현하여 저장
-    private static final Set<String> resultSet = new HashSet<>();
-    
-    public int solution(String[] user_id, String[] banned_id) {
-        resultSet.clear();
-        boolean[] used = new boolean[user_id.length];
-        dfs(0, banned_id, user_id, used, new ArrayList<>());
-        return resultSet.size();
-    }
-    
-    private void dfs(int idx, String[] banned, String[] users, boolean[] used, List<String> list) {
-        if (idx == banned.length) {
-            // 후보 조합은 순서에 상관없이 동일하면 같은 조합으로 처리해야 하므로, 정렬 후 문자열로 변환하여 저장
-            List<String> sortedList = new ArrayList<>(list);
-            Collections.sort(sortedList);
-            String key = String.join(",", sortedList);
-            resultSet.add(key);
-            return;
-        }
+    public int solution(int[] stones, int k) {
+        int left = 1;
+        int right = 200000000;
+        int answer = 0;
         
-        // banned[idx]에 매칭되는 모든 user_id 후보를 탐색
-        for (int i = 0; i < users.length; i++) {
-            if (!used[i] && isMatch(users[i], banned[idx])) {
-                used[i] = true;
-                list.add(users[i]);
-                dfs(idx + 1, banned, users, used, list);
-                list.remove(list.size() - 1);
-                used[i] = false;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (canCross(stones, k, mid)) {
+                answer = mid;      // mid 명이 건널 수 있다면 후보 갱신
+                left = mid + 1;    // 더 많은 사람이 건널 수 있는지 탐색
+            } else {
+                right = mid - 1;
             }
         }
+        
+        return answer;
     }
     
-    private boolean isMatch(String user, String banned) {
-        if (user.length() != banned.length()) {
-            return false;
-        }
-        for (int i = 0; i < user.length(); i++) {
-            char c1 = user.charAt(i);
-            char c2 = banned.charAt(i);
-            if (c2 == '*') continue;
-            if (c1 != c2) return false;
+    // 주어진 people 수(즉, mid 명)가 건널 수 있는지 판단하는 함수
+    private boolean canCross(int[] stones, int k, int people) {
+        int count = 0;
+        for (int stone : stones) {
+            // stone의 내구도가 people보다 작으면, 이 돌은 해당 인원에 의해 다 사용되어 건널 수 없는 돌이 됨
+            if (stone < people) {
+                count++;
+                if (count >= k) {
+                    return false; // 연속된 돌이 k개 이상이면 건널 수 없음
+                }
+            } else {
+                count = 0;
+            }
         }
         return true;
     }
