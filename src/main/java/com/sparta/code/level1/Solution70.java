@@ -1,6 +1,6 @@
 package com.sparta.code.level1;
 
-public class Solution {
+public class Solution70 {
     
     public int solution(int[] schedules, int[][] timelogs, int startDay) {
         int count = 0;
