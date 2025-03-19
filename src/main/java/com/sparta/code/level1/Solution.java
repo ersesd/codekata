@@ -1,19 +1,21 @@
 package com.sparta.code.level1;
 
+import java.util.*;
+
 public class Solution {
     
-    public int solution(String s) {
-        s = s.replace("zero", "0")
-             .replace("one", "1")
-             .replace("two", "2")
-             .replace("three", "3")
-             .replace("four", "4")
-             .replace("five", "5")
-             .replace("six", "6")
-             .replace("seven", "7")
-             .replace("eight", "8")
-             .replace("nine", "9");
-        return Integer.parseInt(s);
+    public String[] solution(String[] strings, int n) {
+        Arrays.sort(strings, new Comparator<String>() {
+            public int compare(String s1, String s2) {
+                char c1 = s1.charAt(n);
+                char c2 = s2.charAt(n);
+                if (c1 == c2) {
+                    return s1.compareTo(s2);
+                }
+                return c1 - c2;
+            }
+        });
+        return strings;
     }
     
 }
