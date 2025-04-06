@@ -2,7 +2,7 @@ package com.sparta.code.level1;
 
 import java.util.*;
 
-public class Solution {
+public class Solution77 {
     
     public String[] solution(String[] strings, int n) {
         Arrays.sort(strings, new Comparator<String>() {
