@@ -2,7 +2,7 @@ package com.sparta.code.level3;
 
 import java.util.*;
 
-class Solution {
+class Solution25 {
     public int solution(int[][] points, int[][] routes) {
         int n = points.length;  // 포인트 개수
         int x = routes.length;  // 로봇 개수
